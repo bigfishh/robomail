@@ -1,4 +1,3 @@
-
 const roads = [
     "Alice's House-Bob's House", 
     "Alice's House-Post Office", 
@@ -50,13 +49,27 @@ class VillageState {
                 return this;
         } else {
             let parcels = this.parcels.map(p => {
+                console.log( "p", p)
+                console.log( "this.place", this.place)
                 if (p.place != this.place) {
                     return p
                 }
                 return {place: destination, address: p.address};
-                }).filter(p => p.place != p.address);
+                }).filter( p => p.place != p.address );
 
                 return new VillageState(destination, parcels);
         }
     } 
+
 }
+
+let first = new VillageState (
+    "Post Office",
+    [{place: "Post Office", address: "Alice's House"}]
+);
+
+let next = first.move("Grete's House");
+console.log(next.place); // → Alice's House 
+console.log(next.parcels); // → [] 
+console.log(first.place); // → Post Office
+
